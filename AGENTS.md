@@ -16,7 +16,11 @@ requirements of the **NOI Syllabus, 2025 Edition** (全国青少年信息学奥�
   content, one GitBook space per language, mirroring syllabus section 2.1.5
   "数学与其他" (Mathematics and Others).
 - Each space directory contains `README.md` (landing page), `SUMMARY.md`
-  (table of contents) and one Markdown page per syllabus topic.
+  (table of contents) and one Markdown page per syllabus topic. A topic with
+  substantial content (e.g. 初等数论 / Elementary Number Theory) is a folder:
+  `README.md` as the topic landing page plus one sub-page per syllabus item,
+  each with description (讲解), worked examples (例题) and practice problems
+  (练习).
 
 ## Conventions
 
