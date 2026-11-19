@@ -1,0 +1,25 @@
+$schema: https://api.gitbook.com/gitbook-docs.yaml
+site:
+  title: CSP Math — NOI 竞赛数学
+  structure:
+    - type: section
+      key: section-introductory
+      title: Introductory Level 入门级
+      path: introductory
+      default: true
+      children:
+        - type: space
+          key: space-introductory-en
+          title: Introductory Math (English)
+          path: en
+          default: true
+          content:
+            directory: ./introductory/en
+            language: en
+        - type: space
+          key: space-introductory-zh
+          title: 入门级数学（中文）
+          path: zh
+          content:
+            directory: ./introductory/zh
+            language: zh
