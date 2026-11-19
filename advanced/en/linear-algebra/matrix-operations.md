@@ -7,22 +7,34 @@
 * **Addition/subtraction**: same-shape matrices, componentwise:
   (A ± B)ᵢⱼ = aᵢⱼ ± bᵢⱼ.
 * **Scalar multiplication**: (cA)ᵢⱼ = c·aᵢⱼ.
-* **Multiplication**: for A of shape m×k and B of shape k×n, the product C = A·B
-  of shape m×n has
+* **Multiplication**: for A of shape m×k and B of shape k×n, the product
+  C = A·B of shape m×n has
 
   > cᵢⱼ = Σₜ aᵢₜ · bₜⱼ
 
-  — row i of A dotted with column j of B. **Not commutative**: in general
-  AB ≠ BA. It is associative: (AB)C = A(BC).
-* **Transpose (转置)**: (Aᵀ)ᵢⱼ = aⱼᵢ — rows become columns. Rules:
-  (Aᵀ)ᵀ = A, (A + B)ᵀ = Aᵀ + Bᵀ, (AB)ᵀ = BᵀAᵀ (note the order reversal!).
+  — row i of A dotted with column j of B. The inner dimensions must match
+  (k = k); the result takes the outer dimensions (m × n). **Not commutative**:
+  in general AB ≠ BA — geometrically, "rotate then scale" ≠ "scale then
+  rotate". It is associative: (AB)C = A(BC).
+* **Transpose (转置)**: (Aᵀ)ᵢⱼ = aⱼᵢ — reflection across the main diagonal.
+  Rules: (Aᵀ)ᵀ = A, (A + B)ᵀ = Aᵀ + Bᵀ, and **(AB)ᵀ = BᵀAᵀ** — note the order
+  reversal, the most-misapplied identity in this chapter.
+
+![Matrix multiplication: entry c(i,j) is the dot product of row i of A with column j of B](../.gitbook/assets/matrix-mult.png)
+
+**Composition view**: A·B is the matrix of the composed map "first B, then A".
+Matrix multiplication is function composition written as arithmetic — which is
+why it must be associative (composition is) and need not be commutative.
 
 **Cost**: naive m×k times k×n multiplication is O(mkn); for n×n matrices O(n³).
-Strassen-type methods exist but are rarely needed at this level.
+Strassen-type methods exist but are rarely needed at this level. **Associativity
+matters for speed**: A(BC) with B, C vectors costs O(n²), while (AB)C costs
+O(n³) — parenthesize from the cheap side!
 
 **Star application — matrix exponentiation (矩阵快速幂)**: a linear recurrence
-Fₙ₊₁ = aFₙ + bFₙ₋₁ rewrites as a matrix power; combined with fast exponentiation it
-computes Fₙ in O(log n) matrix multiplications.
+Fₙ₊₁ = aFₙ + bFₙ₋₁ rewrites as a matrix power; combined with fast
+exponentiation it computes Fₙ in O(log n) matrix multiplications — the standard
+tool whenever a linear recurrence must be evaluated at n up to 10¹⁸.
 
 ## Examples
 
@@ -63,15 +75,20 @@ F₁₀ in O(log 10) matrix multiplications — versus O(n) iteration.
 
 1. Compute [[2,0],[1,3]] · [[1,1],[0,2]] and the product in the reverse order.
    *(Answer: [[2,2],[1,7]]; [[3,3],[2,6]].)*
-2. Let A = [[1,2,3]] (1×3), B = [[4],[5],[6]] (3×1). Compute AB and BA — shapes?
-   *(Answer: AB = [32] (1×1); BA is 3×3 = [[4,8,12],[5,10,15],[6,12,18]].)*
+2. Let A = [[1,2,3]] (1×3), B = [[4],[5],[6]] (3×1). Compute AB and BA —
+   shapes? *(Answer: AB = [32] (1×1); BA is 3×3 = [[4,8,12],[5,10,15],
+   [6,12,18]]. Same numbers, totally different shapes.)*
 3. Verify (A + B)ᵀ = Aᵀ + Bᵀ on 2×2 examples of your choice.
 4. Compute the 5th Fibonacci number via the matrix power of Example 3 by hand
    (F₁ = 1, F₂ = 1). *(Answer: F₅ = 5.)*
 5. If A is m×k and B is p×n, when does AB exist? When do both AB and BA exist?
    *(Answer: k = p; k = p and m = n.)*
-6. Write a program that computes the n-th Fibonacci number mod 10⁹+7 by matrix fast
-   power for n up to 10¹⁸.
-7. (Challenge) The number of walks of length L between all vertex pairs of a graph
-   equals the entries of A^L (A = adjacency matrix). Write a program computing the
-   number of length-L walks from s to t mod 998244353 in O(n³ log L).
+6. Matrices X(2×3), Y(3×4), Z(4×1): compare the cost of (XY)Z vs X(YZ).
+   *(Answer: 2·3·4 + 2·4·1 = 32 vs 3·4·1 + 2·3·1 = 18 — associativity is free
+   speed.)*
+7. Write a program that computes the n-th Fibonacci number mod 10⁹+7 by matrix
+   fast power for n up to 10¹⁸.
+8. (Challenge) The number of walks of length L between all vertex pairs of a
+   graph equals the entries of A^L (A = adjacency matrix). Write a program
+   computing the number of length-L walks from s to t mod 998244353 in
+   O(n³ log L).

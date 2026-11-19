@@ -10,19 +10,28 @@ the **stars and bars (隔板法)** count:
 
 > C(m + k − 1, k − 1)
 
+![Stars and bars: ★★★|★★★★★|★★ encodes the solution x₁ = 3, x₂ = 5, x₃ = 2 of x₁+x₂+x₃ = 10](../.gitbook/assets/stars-bars.png)
+
 **Why**: lay the m chosen (identical) items in a row (stars) and insert k − 1 bars
-to separate the types. Every arrangement of m stars and k − 1 bars encodes exactly
-one choice, and there are C(m + k − 1, k − 1) such arrangements.
+to separate the types, as in the figure. Every arrangement of m stars and k − 1
+bars encodes exactly one choice, and there are C(m + k − 1, k − 1) such
+arrangements — choosing where the bars go among m + k − 1 positions.
 
 Equivalently: the number of non-negative integer solutions of
 
 > x₁ + x₂ + … + xₖ = m
 
 is C(m + k − 1, k − 1). For **positive** solutions (every type chosen at least
-once), substitute yᵢ = xᵢ − 1: count is C(m − 1, k − 1).
+once), substitute yᵢ = xᵢ − 1: the equation becomes y₁ + … + yₖ = m − k in
+non-negative integers, giving C(m − 1, k − 1).
 
-**Bounded case** (type i has at most nᵢ copies): inclusion–exclusion on the violated
-bounds.
+**Bounded case** (type i has at most nᵢ copies): no closed form in general — use
+[inclusion–exclusion](inclusion-exclusion.md) on the violated bounds, as in
+Example 4.
+
+**Common pitfall**: stars and bars counts distributions to **distinct** recipients.
+Identical recipients (partitions of an integer) are a much harder, different
+problem.
 
 ## Examples
 
@@ -36,8 +45,8 @@ least 1: C(10−1, 3−1) = C(9, 2) = 36. With no restriction: C(12, 2) = 66.
 
 **Example 4.** Bounded: x + y + z = 8 with each variable ≤ 3. Total non-negative:
 C(10, 2) = 45. Subtract cases where some variable ≥ 4 (set x′ = x − 4:
-C(6, 2) = 15 each, three variables → 45): 45 − 45 = 0… plus add back double
-violations? Two variables ≥ 4 → sum ≥ 8, exactly (4,4,0)-type: 3 cases.
+C(6, 2) = 15 each, three variables → 45). Add back double violations
+(two variables ≥ 4 forces the sum ≥ 8, exactly the (4,4,0)-type: 3 cases):
 45 − 45 + 3 = 3. Check by hand: (2,3,3), (3,2,3), (3,3,2) — 3. ✓
 
 **Example 5 (C++).** Stars and bars:
@@ -58,7 +67,7 @@ long long ans = C(m + k - 1, k - 1);
 4. How many ways to choose 8 flowers from roses, tulips and lilies (unlimited
    supply)? *(Answer: C(10, 2) = 45.)*
 5. Solutions of x + y + z = 20 with x ≥ 2, y ≥ 3, z ≥ 5.
-   *(Hint: substitute. Answer: C(10+2, 2) = C(12, 2) = 66.)*
+   *(Hint: substitute. Answer: C(12, 2) = 66.)*
 6. Solutions of x + y + z = 10 with each ≤ 4.
    *(Answer: C(12,2) − 3·C(7,2) + 3·C(2,2) = 66 − 63 + 3 = 6.)*
 7. Write a program that reads m, k and prints the number of non-negative solutions

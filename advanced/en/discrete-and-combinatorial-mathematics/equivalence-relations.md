@@ -15,13 +15,29 @@ An equivalence relation partitions S into disjoint **equivalence classes**
 (等价类): [a] = {x : x ~ a}. Every element belongs to exactly one class — the
 classes form a **partition** of S.
 
-Classic examples: congruence mod m (classes = residue classes); "same remainder
-mod 3"; connectivity in a graph (classes = connected components); "has the same
-birthday".
+```mermaid
+graph TD
+    subgraph "S partitioned into classes"
+        C1["[0] = {0, 3, 6, ...}"]
+        C2["[1] = {1, 4, 7, ...}"]
+        C3["[2] = {2, 5, 8, ...}"]
+    end
+```
+
+*Congruence mod 3 partitions ℤ into three disjoint classes.*
+
+Classic examples: congruence mod m (classes = residue classes); connectivity in a
+graph (classes = connected components); "has the same birthday".
+
+**Why you should care**: equivalence relations are the mathematical version of
+"grouping by". Any time a problem says "treat these as the same", check the three
+properties — if they hold, you may pick one representative per class and work only
+with representatives.
 
 **In competitive programming**, equivalence classes are maintained by the
 **disjoint-set union (并查集)** data structure: `find` returns the class
-representative, `unite` merges two classes — near-constant amortized time.
+representative, `unite` merges two classes — near-constant amortized time with path
+compression.
 
 ## Examples
 
@@ -34,9 +50,9 @@ symmetric, transitive → equivalence; classes are {0–9}, {10–19}, …, {90�
 **Example 3.** "a ~ b iff a − b is even" splits ℤ into evens and odds — 2 classes.
 This is exactly congruence mod 2.
 
-**Example 4.** Non-example: "a < b" is transitive but neither reflexive nor
-symmetric → not an equivalence relation. "a ~ b iff |a − b| ≤ 1" on ℤ is reflexive
-and symmetric but not transitive (0 ~ 1, 1 ~ 2, yet 0 ≁ 2).
+**Example 4.** Non-examples: "a < b" is transitive but neither reflexive nor
+symmetric. "a ~ b iff |a − b| ≤ 1" on ℤ is reflexive and symmetric but not
+transitive (0 ~ 1, 1 ~ 2, yet 0 ≁ 2). Each failed property kills the equivalence.
 
 **Example 5 (C++).** DSU sketch:
 

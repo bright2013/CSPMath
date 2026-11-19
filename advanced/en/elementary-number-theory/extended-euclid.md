@@ -9,6 +9,16 @@ g = gcd(a, b), integers x and y satisfying Bézout's identity:
 
 > a·x + b·y = g
 
+**Geometric intuition — the Euclidean algorithm as tiling.** Fitting the largest
+possible squares into an a × b rectangle mirrors the division steps exactly:
+
+![Tiling a 48×18 rectangle: 48 = 2·18 + 12, then 18 = 1·12 + 6, then 12 = 2·6 — the last square, 6×6, is the gcd](../.gitbook/assets/gcd-rectangle.png)
+
+Each "fill with squares, keep the remainder" step is one division. The side of the
+smallest square that exactly tiles the whole rectangle is gcd(48, 18) = 6. exGCD
+adds bookkeeping on top: it remembers *how* each remainder was formed so it can
+reconstruct the coefficients at the end.
+
 **How it works.** The plain Euclidean step is a = b·q + r. Recursively solving
 b·x′ + r·y′ = g and substituting r = a − b·q gives:
 
@@ -19,25 +29,29 @@ so x = y′, y = x′ − q·y′. Base case: gcd(a, 0) = a with x = 1, y = 0.
 **Applications:**
 
 * **Modular inverse**: if gcd(a, m) = 1, then a·x + m·y = 1 → a⁻¹ ≡ x (mod m).
+  This is the inverse method that works for **any** modulus, not just primes.
 * **Linear Diophantine equations**: a·x + b·y = c is solvable iff gcd(a, b) | c;
   from one solution (x₀, y₀) all solutions are x = x₀ + (b/g)t,
   y = y₀ − (a/g)t for t ∈ ℤ.
-* Building block of the general Chinese remainder theorem.
+* Building block of the general [Chinese remainder theorem](crt.md) for non-coprime
+  moduli.
 
 ## Examples
 
-**Example 1.** a = 252, b = 105 by hand:
+**Example 1.** a = 252, b = 105 by hand — divide first, then back-substitute:
 
 ```
 252 = 105·2 + 42      21 = 105 − 42·2
-105 =  42·2 + 21  →   21 = 105 − (252 − 105·2)·2 = 252·(−2) + 105·5
- 42 =  21·2 +  0
+105 =  42·2 + 21  →        = 105 − (252 − 105·2)·2
+ 42 =  21·2 +  0           = 252·(−2) + 105·5
 ```
 
-So gcd = 21, x = −2, y = 5.
+So gcd = 21, x = −2, y = 5. Check: −504 + 525 = 21. ✓
 
 **Example 2.** Inverse of 11 mod 26: exGCD gives 11·(−7) + 26·3 = 1, so
 11⁻¹ ≡ −7 ≡ 19 (mod 26). Check: 11·19 = 209 = 26·8 + 1. ✓
+(Pitfall: the raw x from exGCD can be negative — always normalize with
+`(x % m + m) % m`.)
 
 **Example 3 (C++).** Implementation:
 
@@ -53,8 +67,8 @@ long long exgcd(long long a, long long b, long long &x, long long &y) {
 // modular inverse: exgcd(a, m, x, y); inv = (x % m + m) % m;
 ```
 
-**Example 4.** Solve 12x + 18y = 30: g = 6 | 30. Divide by 6: 2x + 3y = 5.
-One solution: x = 1, y = 1. General: x = 1 + 3t, y = 1 − 2t.
+**Example 4.** Solve 12x + 18y = 30: g = 6 | 30, so solvable. Divide by 6:
+2x + 3y = 5. One solution: x = 1, y = 1. General: x = 1 + 3t, y = 1 − 2t.
 
 ## Practice
 

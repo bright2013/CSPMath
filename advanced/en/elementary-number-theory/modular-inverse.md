@@ -11,10 +11,16 @@ The **modular inverse** of a modulo m is an integer x such that
 written a⁻¹ (mod m). **It exists if and only if gcd(a, m) = 1**, and is then unique
 modulo m.
 
+**Existence, in one line**: a·x ≡ 1 (mod m) means a·x + m·y = 1 for some y — a
+[Bézout equation](bezout.md), solvable exactly when gcd(a, m) = 1.
+
 The inverse makes **division possible in modular arithmetic**: "divide by a" becomes
 "multiply by a⁻¹":
 
 > b / a (mod m) ≡ b · a⁻¹ (mod m)
+
+This is what was missing at the introductory level, where only +, −, × respected
+congruences.
 
 **Three ways to compute it:**
 
@@ -23,7 +29,8 @@ The inverse makes **division possible in modular arithmetic**: "divide by a" bec
 2. **Fermat's little theorem** — when m = p is prime: a⁻¹ ≡ a^(p−2) (mod p), via
    fast exponentiation. O(log p).
 3. **Linear preprocessing of all inverses mod prime p** (递推):
-   inv[i] = (p − p/i) · inv[p % i] % p, giving inv[1..n] in O(n).
+   inv[i] = (p − p/i) · inv[p % i] % p, giving inv[1..n] in O(n) total — the choice
+   when a solution needs *every* inverse up to n.
 
 **Typical use**: computing C(n, m) mod p — precompute factorials and inverse
 factorials, then C(n,m) = fact[n] · invFact[m] · invFact[n−m] mod p.
@@ -58,6 +65,9 @@ invFact[N] = qpow(fact[N], P - 2, P);
 for (int i = N; i >= 1; i--) invFact[i-1] = invFact[i] * i % P;
 // C(n, m) = fact[n] * invFact[m] % P * invFact[n-m] % P
 ```
+
+Note the trick: one exponentiation for invFact[N], then a downward pass turns it
+into *all* inverse factorials — n inverses for the price of one.
 
 ## Practice
 

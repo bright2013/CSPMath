@@ -7,9 +7,16 @@
 **Euler's totient function** φ(n) counts the integers in [1, n] that are coprime
 with n.
 
+![Sieving primes up to 30 — the same sieve machinery computes φ for all values at once](../.gitbook/assets/sieve-eratosthenes.png)
+
 **Computation from the prime factorization** n = p₁^a₁ · … · pₖ^aₖ:
 
 > φ(n) = n · ∏ᵢ (1 − 1/pᵢ) = n · (p₁−1)/p₁ · … · (pₖ−1)/pₖ
+
+**Where the formula comes from.** Among the numbers 1…n, a fraction 1/p₁ is
+divisible by p₁, so (1 − 1/p₁) survive that filter; filtering out multiples of each
+distinct prime in turn multiplies the survival probabilities. Only the *distinct*
+primes matter — the exponents aᵢ are invisible here except through n itself.
 
 Special cases: φ(p) = p − 1 for prime p; φ(pᵏ) = pᵏ − pᵏ⁻¹; and φ is
 **multiplicative**: φ(ab) = φ(a)φ(b) when gcd(a, b) = 1.
@@ -18,10 +25,17 @@ Special cases: φ(p) = p − 1 for prime p; φ(pᵏ) = pᵏ − pᵏ⁻¹; and �
 
 > a^φ(n) ≡ 1 (mod n)
 
-Consequence: to compute aᵏ mod n with gcd(a, n) = 1, you may reduce the exponent
-mod φ(n): aᵏ ≡ a^(k mod φ(n)) (mod n).
+**Proof idea.** The φ(n) residues coprime to n form a reduced residue system.
+Multiplying each by a (which is coprime to n) just permutes them, so the product of
+all of them is unchanged: a^φ(n) · P ≡ P (mod n), and P cancels since it is coprime
+to n.
 
-**Computing φ for all i ≤ n** can be done in the linear sieve in O(n).
+Consequence: to compute aᵏ mod n with gcd(a, n) = 1, you may reduce the exponent
+mod φ(n): aᵏ ≡ a^(k mod φ(n)) (mod n). **Pitfall**: this needs gcd(a, n) = 1 —
+see Example 4 for what to do when it fails.
+
+**Computing φ for all i ≤ n** can be done inside the linear sieve in O(n), using
+the two rules φ(i·p) = φ(i)·p when p | i and φ(i·p) = φ(i)·(p−1) otherwise.
 
 ## Examples
 
@@ -30,11 +44,12 @@ Formula check: 12 = 2²·3, φ(12) = 12·(1/2)·(2/3) = 4. ✓
 
 **Example 2.** φ(36) = 36·(1/2)·(2/3) = 12. φ(100) = 100·(1/2)·(4/5) = 40.
 
-**Example 3.** Euler's theorem with a = 5, n = 12: 5⁴ = 625 = 12·52 + 1 ≡ 1 (mod 12). ✓
+**Example 3.** Euler's theorem with a = 5, n = 12: 5⁴ = 625 = 12·52 + 1 ≡ 1
+(mod 12). ✓
 
 **Example 4.** Last two digits of 7²⁰²⁴: gcd(7, 100) = 1 and φ(100) = 40, so
-7⁴⁰ ≡ 1 (mod 100); 2024 mod 40 = 24; 7²⁴ mod 100 = 01 → answer 01.
-(Working: 7² = 49, 7⁴ = 01 (mod 100)! So actually 7²⁴ = (7⁴)⁶ ≡ 1.)
+7⁴⁰ ≡ 1 (mod 100); 2024 mod 40 = 24; and 7⁴ = 2401 ≡ 01 (mod 100), so
+7²⁴ = (7⁴)⁶ ≡ 1 → the last two digits are 01.
 
 **Example 5 (C++).** φ(n) in O(√n) from trial division:
 
@@ -44,7 +59,7 @@ long long phi(long long n) {
     for (long long p = 2; p * p <= n; p++)
         if (n % p == 0) {
             while (n % p == 0) n /= p;
-            r = r / p * (p - 1);
+            r = r / p * (p - 1);   // multiply by (1 - 1/p) safely
         }
     if (n > 1) r = r / n * (n - 1);
     return r;

@@ -15,9 +15,15 @@ own position** (π(i) ≠ i for all i). The count satisfies:
 
 First values: 0, 1, 2, 9, 44, 265 (n = 1…6).
 
-Recurrence idea: element 1 goes to position k (n−1 choices); if element k goes back
-to position 1, the remaining n−2 elements derange (Dₙ₋₂); otherwise element k plays
-the role of element 1 among the rest (Dₙ₋₁).
+**Recurrence idea**: element 1 goes to position k (n−1 choices). If element k goes
+back to position 1, the remaining n−2 elements derange freely: Dₙ₋₂ options.
+Otherwise element k must avoid position 1 — exactly as if it *were* element 1 among
+the n−1 remaining elements: Dₙ₋₁ options.
+
+The series formula comes from [inclusion–exclusion](inclusion-exclusion.md) on the
+properties "position i keeps its own element" — and the limit n!/e explains the
+famous fact that a random permutation is a derangement with probability ≈ 1/e ≈
+37%, for any large n.
 
 ### Circular permutations (圆排列)
 
@@ -26,9 +32,12 @@ considered the same:
 
 > (n − 1)!
 
+![Six people around a round table: rotations are the same arrangement](../.gitbook/assets/round-table.png)
+
 **Why**: n! linear arrangements, but each circular arrangement is counted n times
-(once per rotation), so n!/n = (n−1)!. If reflections also count as the same
-(e.g. a necklace that can be flipped), divide by 2: (n−1)!/2.
+(once per rotation), so n!/n = (n−1)!. Equivalently: fix one person's seat to break
+the rotational symmetry, then arrange the other n−1 freely. If reflections also
+count as the same (e.g. a necklace that can be flipped), divide by 2: (n−1)!/2.
 
 ## Examples
 
@@ -60,8 +69,8 @@ for (int i = 3; i <= n; i++)
 2. A secretary puts 5 letters into 5 addressed envelopes at random. How many ways
    with every letter in a wrong envelope? What is the probability?
    *(Answer: 44; 44/120 = 11/30.)*
-3. How many ways can 6 couples… simpler: 6 children sit around a round table; how
-   many seating arrangements? *(Answer: 5! = 120.)*
+3. 6 children sit around a round table; how many seating arrangements?
+   *(Answer: 5! = 120.)*
 4. 5 distinct beads on a bracelet (flippable): how many designs?
    *(Answer: 4!/2 = 12.)*
 5. n men check n hats; in how many ways can exactly n−2 get their own hat back?
