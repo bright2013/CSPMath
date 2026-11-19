@@ -15,6 +15,8 @@ requirements of the **NOI Syllabus, 2025 Edition** (全国青少年信息学奥�
 - `introductory/en/`, `introductory/zh/` — 入门级 (Introductory Level, CSP-J)
   content, one GitBook space per language, mirroring syllabus section 2.1.5
   "数学与其他" (Mathematics and Others).
+- `advanced/en/`, `advanced/zh/` — 提高级 (Advanced Level, CSP-S) content, one
+  GitBook space per language, mirroring syllabus section 2.2.5 "数学与其他".
 - Each space directory contains `README.md` (landing page), `SUMMARY.md`
   (table of contents) and one Markdown page per syllabus topic. A topic with
   substantial content (e.g. 初等数论 / Elementary Number Theory) is a folder:
@@ -37,5 +39,5 @@ requirements of the **NOI Syllabus, 2025 Edition** (全国青少年信息学奥�
 ## Status / roadmap
 
 - [x] 入门级 Introductory Level — 2.1.5 数学与其他 (en + zh)
-- [ ] 提高级 Advanced Level — math sections
+- [x] 提高级 Advanced Level — 2.2.5 数学与其他 (en + zh)
 - [ ] NOI 级 NOI Level — math sections

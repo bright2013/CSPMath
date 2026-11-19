@@ -3,8 +3,10 @@
 A bilingual (English / 中文) GitBook covering the mathematics requirements of the
 **NOI Syllabus (2025 Edition)** (全国青少年信息学奥林匹克系列竞赛大纲 2025 年修订版).
 
-目前内容：**2.1 入门级（Introductory Level, CSP-J）— 2.1.5 数学与其他**。
-Current coverage: **2.1 Introductory Level (CSP-J) — 2.1.5 Mathematics and Others**.
+目前内容：**2.1 入门级（Introductory Level, CSP-J）— 2.1.5 数学与其他**，
+**2.2 提高级（Advanced Level, CSP-S）— 2.2.5 数学与其他**。
+Current coverage: **2.1 Introductory Level (CSP-J) — 2.1.5 Mathematics and Others**,
+**2.2 Advanced Level (CSP-S) — 2.2.5 Mathematics and Others**.
 
 ## Structure 目录结构
 
@@ -12,6 +14,9 @@ Current coverage: **2.1 Introductory Level (CSP-J) — 2.1.5 Mathematics and Oth
 introductory/
 ├── en/   # Introductory Math in English (GitBook space)
 └── zh/   # 入门级数学（中文，GitBook 空间）
+advanced/
+├── en/   # Advanced Math in English (GitBook space)
+└── zh/   # 提高级数学（中文，GitBook 空间）
 ```
 
 Site structure is defined in `gitbook-docs.yaml` for GitBook Git Sync.

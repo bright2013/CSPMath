@@ -23,3 +23,23 @@ site:
           content:
             directory: ./introductory/zh
             language: zh
+    - type: section
+      key: section-advanced
+      title: Advanced Level 提高级
+      path: advanced
+      children:
+        - type: space
+          key: space-advanced-en
+          title: Advanced Math (English)
+          path: en
+          default: true
+          content:
+            directory: ./advanced/en
+            language: en
+        - type: space
+          key: space-advanced-zh
+          title: 提高级数学（中文）
+          path: zh
+          content:
+            directory: ./advanced/zh
+            language: zh
