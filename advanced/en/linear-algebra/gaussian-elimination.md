@@ -90,6 +90,21 @@ for (int col = 0; col < n; col++) {
 **Example 5.** GF(2) elimination: replace subtraction/division by XOR — the
 basis of linear-basis (线性基) techniques for max-XOR problems.
 
+**Example 6 (walkthrough — what the computer "sees", step by step).** Solve with
+n = 3:
+
+```
+x + y + z = 6
+x + 2y + 3z = 14
+x + 4y + 9z = 36
+```
+
+Column 1: pivot row 1. R₂ ← R₂ − R₁ gives [0, 1, 2 | 8]; R₃ ← R₃ − R₁ gives
+[0, 3, 8 | 30]. Column 2: pivot row 2 (entry 1). R₃ ← R₃ − 3R₂ gives
+[0, 0, 2 | 6]. Upper triangular! Back-substitute: z = 3, then y = 8 − 2·3 = 2,
+then x = 6 − 2 − 3 = 1. Check: 1 + 2 + 3 = 6 ✓, 1 + 4 + 9 = 14 ✓,
+1 + 8 + 27 = 36 ✓. Three columns, three pivots — hence a unique solution.
+
 ## Practice
 
 1. Solve by elimination: x + y = 3, x − y = 1. *(Answer: x = 2, y = 1.)*

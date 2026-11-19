@@ -67,6 +67,14 @@ missed"):
 
 > n^m − C(n,1)(n−1)^m + C(n,2)(n−2)^m − … = Σᵢ (−1)ⁱ C(n, i) (n−i)^m
 
+**Example 6 (walkthrough — one element's ledger).** Track the number 30 through
+the computation of Example 1. It is divisible by 2, 3 and 5, so it belongs to
+all three sets. The formula charges it: +1 (in |A|) +1 (|B|) +1 (|C|)
+−1 (A∩B, multiple of 6) −1 (A∩C, of 10) −1 (B∩C, of 15) +1 (A∩B∩C, of 30).
+Net: 3 − 3 + 1 = 1 — counted exactly once, as promised. Now check 14 (only in
+A): +1, nothing else — also once. The alternating signs are precisely tuned so
+that every element's ledger balances to 1.
+
 ## Practice
 
 1. [1, 200] divisible by 3 or 7. *(Answer: 66 + 28 − 9 = 85.)*

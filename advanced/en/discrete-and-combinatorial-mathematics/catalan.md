@@ -27,6 +27,12 @@ First values: 1, 1, 2, 5, 14, 42, 132, 429, 1430 (C₀…C₈).
   convex (n+2)-gon; stack-sortable permutations; full parenthesizations of n+1
   factors.
 
+![The five binary trees with 3 nodes — same count as the 5 valid parenthesizations for n = 3](../.gitbook/assets/catalan-trees.png)
+
+The trees and the bracket strings above are literally the same objects in
+disguise: read a tree left-to-right and every "(subtree)" becomes a "(…)pair".
+Bijections like this are why one sequence rules so many problems.
+
 **Why the closed form works (reflection principle, sketch).** All monotone paths
 from (0,0) to (n,n): C(2n, n). A *bad* path rises above the diagonal — reflect the
 part up to its first step above the diagonal across the line y = x + 1; the
@@ -57,6 +63,16 @@ cat[0] = 1;
 for (int i = 0; i < n; i++)
     cat[i+1] = cat[i] * (4*i + 2) % P * inv(i + 2, P) % P;
 ```
+
+**Example 6 (walkthrough — C₅ by the recurrence, term by term).** Split a Dyck
+path of semilength 5 at its first return to the axis: inside is a Dyck path of
+size i, after it one of size 4 − i. Sum over the split point:
+
+> C₅ = C₀C₄ + C₁C₃ + C₂C₂ + C₃C₁ + C₄C₀ = 14 + 5 + 4 + 5 + 14 = 42
+
+Every term counts the paths with a particular first-return point — disjoint
+cases, so they add. This "split at a distinguished spot and multiply the two
+sides" pattern is the fingerprint of Catalan-style recurrences.
 
 ## Practice
 

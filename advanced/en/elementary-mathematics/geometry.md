@@ -10,8 +10,10 @@ coordinates, and coordinates reduce everything to algebra.
 
 * **Plane vectors (平面向量)**: addition, subtraction, scalar multiplication; the
   dot product a·b = |a||b|cos θ = x₁x₂ + y₁y₂; perpendicularity test a·b = 0;
-  projections. The dot product is the bridge between geometry (angles) and
-  algebra (a sum of products — trivially computable).
+  projections. In plain words: the dot product measures *how much two vectors
+  point the same way* — positive for acute angles, zero for right angles,
+  negative for obtuse. It is the bridge between geometry (angles) and algebra
+  (a sum of products — trivially computable).
 * **Solid geometry (立体几何)**: prisms, pyramids, cylinders, cones, spheres —
   surface areas and volumes (V_sphere = 4πr³/3, S_sphere = 4πr²); parallel and
   perpendicular relations between lines and planes; three-view drawings. Mostly
@@ -25,6 +27,13 @@ coordinates, and coordinates reduce everything to algebra.
     foci = 2a), hyperbola x²/a² − y²/b² = 1 (difference = 2a), parabola y² = 2px
     (distance to focus = distance to directrix); eccentricity e = c/a;
   * space Cartesian coordinates and the 3D distance formula.
+
+**The three conics at a glance:**
+
+![Ellipse, hyperbola and parabola](../.gitbook/assets/conics.png)
+
+All three arise as cross-sections of a cone (hence the name) and share the
+eccentricity framework: e < 1 ellipse, e = 1 parabola, e > 1 hyperbola.
 
 **The ellipse, up close:**
 
@@ -47,17 +56,26 @@ avoid division by zero.
 **Example 2.** Perpendicularity: (2, −1)·(2, 4) = 4 − 4 = 0 → the vectors are
 perpendicular.
 
-**Example 3.** Distance from point (1, 2) to line 3x + 4y − 5 = 0:
-|3·1 + 4·2 − 5|/√(9+16) = 6/5.
+**Example 3 (walkthrough — point-to-line distance).** Distance from (1, 2) to
+3x + 4y − 5 = 0: plug the point into the line's left side, |3·1 + 4·2 − 5| = 6;
+divide by √(A²+B²) = 5; answer 6/5. The numerator measures "how wrong" the
+point is for the line's equation; the denominator normalizes by the normal
+vector's length.
 
 **Example 4.** Circle (x−1)² + (y+2)² = 9 has center (1, −2), radius 3. The
-line x = 4 is tangent to it (distance from center = 3 = r).
+line x = 4 is tangent to it (distance from center = 3 = r). Distance < r would
+mean two intersections; > r would mean none.
 
 **Example 5.** Ellipse x²/25 + y²/9 = 1: a = 5, b = 3, c = √(25−9) = 4, foci
 at (±4, 0), eccentricity e = c/a = 4/5. Any point P on it satisfies
 |PF₁| + |PF₂| = 10.
 
-**Example 6 (C++).** Dot product and distance, the workhorses of computational
+**Example 6 (walkthrough — where does the 2a go?).** On that ellipse, check the
+top vertex P = (0, 3): |PF₁| = √(16+9) = 5, |PF₂| = 5, sum 10 = 2a ✓. Check
+the right vertex (5, 0): 9 + 1 = 10 ✓. The constant-sum property holds at every
+point — vertices are just the easiest places to verify it.
+
+**Example 7 (C++).** Dot product and distance, the workhorses of computational
 geometry:
 
 ```cpp
@@ -84,7 +102,11 @@ double dist(double x1, double y1, double x2, double y2) {
    directrix x = −2.)*
 6. An ellipse has foci (±3, 0) and passes through (5, 0). Find its equation.
    *(Answer: c = 3, a = 5, b = 4 → x²/25 + y²/16 = 1.)*
-7. Distance between A(1, 2, 3) and B(4, 6, 3) in space. *(Answer: 5.)*
-8. (Challenge) Triangle with vertices A(0,0), B(4,0), C(1,3): compute its area
-   via the cross-product formula
-   |x_A(y_B − y_C) + x_B(y_C − y_A) + x_C(y_A − y_B)| / 2. *(Answer: 6.)*
+7. A hyperbola has a = 2, b = 3. Find c and the eccentricity.
+   *(Hint: for hyperbolas c² = a² + b². Answer: c = √13, e = √13/2 > 1.)*
+8. Distance between A(1, 2, 3) and B(4, 6, 3) in space. *(Answer: 5.)*
+9. Is the angle between (1, 2) and (4, −1) acute or obtuse? Answer without any
+   square roots. *(Answer: dot = 2 > 0 → acute.)*
+10. (Challenge) Triangle with vertices A(0,0), B(4,0), C(1,3): compute its area
+    via the cross-product formula
+    |x_A(y_B − y_C) + x_B(y_C − y_A) + x_C(y_A − y_B)| / 2. *(Answer: 6.)*

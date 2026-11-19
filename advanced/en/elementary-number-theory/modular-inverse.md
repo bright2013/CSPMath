@@ -14,6 +14,13 @@ modulo m.
 **Existence, in one line**: a·x ≡ 1 (mod m) means a·x + m·y = 1 for some y — a
 [Bézout equation](bezout.md), solvable exactly when gcd(a, m) = 1.
 
+![Multiplication table mod 7: every nonzero row contains a 1 — every element has an inverse](../.gitbook/assets/inverse-table.png)
+
+In the table above, hunt for the 1s (green): row 2 has its 1 in column 4, so
+2⁻¹ = 4; row 3 in column 5, so 3⁻¹ = 5. Because each row of a prime-modulus
+table is a permutation of {1, …, p−1}, the 1 appears exactly once per row — the
+inverse exists and is unique.
+
 The inverse makes **division possible in modular arithmetic**: "divide by a" becomes
 "multiply by a⁻¹":
 
@@ -68,6 +75,22 @@ for (int i = N; i >= 1; i--) invFact[i-1] = invFact[i] * i % P;
 
 Note the trick: one exponentiation for invFact[N], then a downward pass turns it
 into *all* inverse factorials — n inverses for the price of one.
+
+**Example 6 (walkthrough — building the whole inverse table for p = 7 with the
+O(n) recurrence).** Start with inv[1] = 1 and apply
+inv[i] = (p − ⌊p/i⌋)·inv[p mod i] mod p:
+
+```
+i = 2: inv[2] = (7−3)·inv[1] = 4          (check: 2·4 = 8 ≡ 1)
+i = 3: inv[3] = (7−2)·inv[1] = 5          (check: 3·5 = 15 ≡ 1)
+i = 4: inv[4] = (7−1)·inv[3] = 6·5 = 30 ≡ 2   (check: 4·2 = 8 ≡ 1)
+i = 5: inv[5] = (7−1)·inv[2] = 6·4 = 24 ≡ 3   (check: 5·3 = 15 ≡ 1)
+i = 6: inv[6] = (7−1)·inv[1] = 6          (check: 6·6 = 36 ≡ 1)
+```
+
+Six inverses in six short lines — no exponentiation at all. Why it works: writing
+p = q·i + r gives q·i + r ≡ 0 (mod p), so i⁻¹ ≡ −q·r⁻¹, and r = p mod i < i was
+already computed in an earlier iteration.
 
 ## Practice
 

@@ -33,11 +33,20 @@ cancels.
 O(log k) by squaring. k = 13 = 1101₂ means a¹³ = a⁸·a⁴·a¹ — walk the bits of k,
 squaring a at each step and multiplying into the result when the bit is 1.
 
+![Each box is the previous one squared; the 1-bits of 13 = 1101₂ pick which powers get multiplied](../.gitbook/assets/fast-power.png)
+
 ## Examples
 
 **Example 1.** 2⁶ = 64 ≡ 1 (mod 7). Also 3⁶ = 729 = 7·104 + 1 ≡ 1 (mod 7). ✓
 
 **Example 2.** Compute 2¹⁰⁰ mod 11: 2¹⁰ ≡ 1 (mod 11), so 2¹⁰⁰ = (2¹⁰)¹⁰ ≡ 1.
+
+**Example 2b.** Powers mod a prime always cycle — here is 2ᵏ mod 7, period 3:
+
+![2^k mod 7 runs 1, 2, 4, 1, 2, 4, … — a repeating cycle](../.gitbook/assets/power-cycle.png)
+
+Fermat's little theorem explains the repetition: since 2⁶ ≡ 1 (mod 7), the
+sequence must repeat with a period dividing 6; here the actual period is 3.
 
 **Example 3.** Inverse of 3 mod 7: 3⁵ = 243 = 7·34 + 5 ≡ 5 (mod 7). Check:
 3·5 = 15 ≡ 1. ✓
@@ -62,6 +71,19 @@ long long qpow(long long a, long long k, long long m) {
 coprime to 561 — a Carmichael number; Fermat's test alone cannot detect it.
 (Why: 560 is a multiple of 3−1, 11−1 and 17−1, so the congruence holds modulo
 each prime factor, and CRT assembles it modulo 561.)
+
+**Example 6 (walkthrough — tracing qpow(3, 13, 7)).**
+
+```
+k = 13 (bit 1): r = 1·3 = 3;        a = 3²  ≡ 2 (mod 7);  k = 6
+k = 6  (bit 0): r unchanged;        a = 2²  = 4;            k = 3
+k = 3  (bit 1): r = 3·4 = 12 ≡ 5;   a = 4²  ≡ 2;            k = 1
+k = 1  (bit 1): r = 5·2 = 10 ≡ 3;   done → 3¹³ ≡ 3 (mod 7)
+```
+
+Only 4 squarings and 3 multiplications for an exponent of 13 — for k = 10¹⁸ it
+would take about 60 of each. Check with Fermat: 13 = 12 + 1, so
+3¹³ ≡ 3¹ = 3 (mod 7). ✓
 
 ## Practice
 

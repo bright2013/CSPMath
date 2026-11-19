@@ -70,6 +70,21 @@ long long exgcd(long long a, long long b, long long &x, long long &y) {
 **Example 4.** Solve 12x + 18y = 30: g = 6 | 30, so solvable. Divide by 6:
 2x + 3y = 5. One solution: x = 1, y = 1. General: x = 1 + 3t, y = 1 − 2t.
 
+**Example 5 (walkthrough — tracing exgcd(30, 12) down and back up).**
+
+```
+level 0: exgcd(30, 12):  30 = 12·2 + 6   → needs exgcd(12, 6)
+level 1: exgcd(12, 6):   12 = 6·2 + 0    → needs exgcd(6, 0)
+level 2: exgcd(6, 0)     → returns g = 6, x′ = 1, y′ = 0
+back to 1: x = y′ = 0,  y = x′ − q·y′ = 1 − 2·0 = 1   → 12·0 + 6·1 = 6 ✓
+back to 0: x = y′ = 1,  y = x′ − q·y′ = 0 − 2·1 = −2  → 30·1 + 12·(−2) = 6 ✓
+```
+
+Read it twice: once following the arrows down (this is the plain Euclidean
+algorithm), once climbing back up (the coefficients assemble themselves, one
+substitution per level). The downward trip finds *what* the gcd is; the upward
+trip explains *how* to build it from a and b.
+
 ## Practice
 
 1. Run exGCD by hand on (1071, 462): find g and a Bézout pair.

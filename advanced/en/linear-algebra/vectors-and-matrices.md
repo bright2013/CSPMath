@@ -25,6 +25,13 @@ shears are all matrices; and conversely, every matrix is a combination of such
 simple deformations. Column j of A is exactly where the j-th basis vector lands
 under the map — read a matrix column-by-column to *see* what it does.
 
+![The matrix [[2,1],[0,1]] shears and stretches the unit square into a parallelogram](../.gitbook/assets/matrix-transform.png)
+
+Watch the two basis arrows in the figure: the red arrow (1,0) lands at (2,0) —
+that is column 1 of A; the blue arrow (0,1) lands at (1,1) — that is column 2.
+The whole square comes along for the ride. *Every* linear map works this way:
+decide where the basis vectors go, and every other point follows.
+
 **In programming**, matrices are 2D arrays `double a[N][M]`; vectors are 1D
 arrays. They power: linear recurrences (matrix exponentiation), Gaussian
 elimination, graph adjacency matrices, and dynamic programming transitions.

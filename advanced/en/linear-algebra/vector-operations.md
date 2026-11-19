@@ -39,6 +39,8 @@ integers (watch overflow: products of coordinates up to 10⁹ need 64-bit).
 tests, polygon area via the **shoelace formula** ½|Σ pᵢ × pᵢ₊₁|, point-to-line
 distance, convex hulls.
 
+![The shoelace formula sums cross products of consecutive vertex pairs](../.gitbook/assets/shoelace.png)
+
 ## Examples
 
 **Example 1.** a = (1, 2, 3), b = (4, 0, −1): a + b = (5, 2, 2),
@@ -66,6 +68,14 @@ double cross(double x1, double y1, double x2, double y2) {
     return x1 * y2 - y1 * x2;
 }
 ```
+
+**Example 7 (walkthrough — shoelace on the polygon in the figure).** Vertices
+(1,1), (4,1), (5,3), (2,4). Sum the "down-diagonal" products:
+1·1 + 4·3 + 5·4 + 2·1 = 1 + 12 + 20 + 2 = 35; sum the "up-diagonal" products:
+1·4 + 1·5 + 3·2 + 4·1 = 4 + 5 + 6 + 4 = 19. Area = ½|35 − 19| = 8. The name
+comes from writing the coordinates in two columns and lacing diagonals like a
+shoe. Cross-check with Pick's theorem: 8 boundary lattice points and 5 interior
+ones give 5 + 8/2 − 1 = 8. ✓
 
 ## Practice
 

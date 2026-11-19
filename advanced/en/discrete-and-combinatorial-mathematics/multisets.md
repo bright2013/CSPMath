@@ -25,6 +25,8 @@ nature, not the rule. The two following pages
 and each answers one of the two fundamental questions: *arrange* the multiset
 (order matters) or *choose* a sub-multiset (order doesn't).
 
+![Letter frequencies of MISSISSIPPI — the picture behind the multiset notation](../.gitbook/assets/multiset-freq.png)
+
 **Counting sub-multisets**: from {a₁^n₁, …, aₖ^nₖ}, each element aᵢ can be taken
 0, 1, …, nᵢ times — independently — giving ∏(nᵢ + 1) sub-multisets. Notice the
 parallel with the divisor-count formula: the divisors of p₁^a₁·…·pₖ^aₖ are
@@ -61,6 +63,18 @@ copies of a and 0–1 of b → 3 × 2 = 6 (including the empty one).
 **Example 6.** Anagram check: "listen" and "silent" are anagrams iff their
 letter multisets are equal — compare the two 26-entry frequency arrays in
 O(26).
+
+**Example 7 (walkthrough — anagram check by hand).** Is "debit card" an anagram
+of "bad credit"? Build both frequency multisets: debit card → {d×2, e×1, b×1,
+i×1, t×1, c×1, a×1, r×1}; bad credit → {b×1, a×1, d×2, c×1, r×1, e×1, i×1,
+t×1}. Equal, item by item → yes, anagrams. Sorting the letters ("abcddirt"-style
+fingerprint) is the same test in another costume.
+
+**Example 8 (walkthrough — counting sub-multisets slowly).** {a×2, b×1}: a can
+appear 0, 1 or 2 times (3 choices), b can appear 0 or 1 times (2 choices), and
+the choices are independent — 3·2 = 6: {}, {b}, {a}, {a,b}, {a,a}, {a,a,b}.
+Write them out once; the product formula ∏(nᵢ+1) will never feel like magic
+again.
 
 ## Practice
 

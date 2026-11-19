@@ -12,6 +12,9 @@ requirements of the **NOI Syllabus, 2025 Edition** (全国青少年信息学奥�
 - `gitbook-docs.yaml` — GitBook Git Sync site configuration (schema:
   https://api.gitbook.com/gitbook-docs.yaml). Maps content directories to
   sections/spaces.
+- `scripts/make_figures.py`, `scripts/make_figures2.py` — regenerate the PNG
+  figures in each space's `.gitbook/assets/` (matplotlib, language-neutral
+  labels; copy outputs into both `en` and `zh` asset dirs after running).
 - `introductory/en/`, `introductory/zh/` — 入门级 (Introductory Level, CSP-J)
   content, one GitBook space per language, mirroring syllabus section 2.1.5
   "数学与其他" (Mathematics and Others).

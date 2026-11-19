@@ -19,6 +19,13 @@ running the Euclidean algorithm backwards shows gcd(a, b) itself *is* a combinat
 — that is exactly what the [extended Euclidean algorithm](extended-euclid.md)
 computes.
 
+![Every value of 12x + 18y is a multiple of 6 — and 6 itself is reached](../.gitbook/assets/bezout-line.png)
+
+Picture it on the number line: the combinations 12x + 18y land exactly on the
+multiples of 6, evenly spaced, never hitting anything in between. The gcd is the
+*gap size* of the set you can reach — and Bézout promises the gap size itself is
+reachable.
+
 **Immediate consequences:**
 
 * a, b are coprime ⇔ there exist x, y with a·x + b·y = 1.
@@ -49,6 +56,14 @@ hand.
 Since gcd(4, 9) = 1 | 6, yes. Reading the combination 9·2 − 4·3 = 6 as an
 algorithm: fill the 9-jug twice, emptying into the 4-jug (discarding when full)
 three times.
+
+**Example 6 (walkthrough — the 4-and-9 jug, step by step).** Bézout says
+9·2 − 4·3 = 6. Translate the arithmetic into actions: fill the 9-jug (total
+poured in: 9); pour into the 4-jug and empty it when full (9 − 4 leaves 5; dump
+the 4; pour the 5 over); fill the 9-jug again (total in: 18); top up the 4-jug
+(it needs 3 more, leaving 6 in the big jug). The 9-jug now holds exactly 6. Every
+Bézout coefficient pair is a recipe: positive coefficients count fillings,
+negative count emptyings.
 
 ## Practice
 

@@ -13,6 +13,10 @@ Think of mod m as a **clock with m hours**: adding m to any number brings you ba
 to the same position. The clock above shows 38 mod 7 = 3 — after 5 full turns plus
 3 steps you land on 3.
 
+In plain words: congruence keeps only what matters — the remainder — and throws
+away the number of full turns. Two moments that look identical on the clock are
+"the same" for everything modular arithmetic cares about.
+
 **Congruence is an equivalence relation** and, crucially, it respects arithmetic:
 
 * If a ≡ b and c ≡ d (mod m), then a ± c ≡ b ± d and a·c ≡ b·d (mod m).
@@ -60,6 +64,18 @@ of them.
 for (long long x = 0; x < m; x++)
     if (a * x % m == b % m) cout << x << " ";
 ```
+
+**Example 6 (walkthrough — why the digit rule for 9 works).** 10 ≡ 1 (mod 9), so
+10ᵏ ≡ 1 (mod 9) for every k. Therefore
+4572 = 4·10³ + 5·10² + 7·10 + 2 ≡ 4 + 5 + 7 + 2 = 18 ≡ 0 (mod 9): a number is
+divisible by 9 iff its digit sum is. Every "digit rule" is a congruence in
+disguise — the rule for 11 uses 10 ≡ −1 (mod 11) instead.
+
+**Example 7 (walkthrough — 2¹⁰⁰ mod 7 by cycle hunting).** Compute small powers
+and watch for repetition: 2, 4, 1, 2, 4, 1, … — period 3 (the
+[theorems ahead](fermat-little-theorem.md) explain why a period must exist and how
+long it can be). Since 100 = 3·33 + 1, we get 2¹⁰⁰ ≡ 2¹ = 2 (mod 7). Finding the
+cycle on small values is always worth a minute before reaching for heavy tools.
 
 ## Practice
 

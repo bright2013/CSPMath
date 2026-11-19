@@ -27,6 +27,8 @@ an arrangement of {R×p, U×q} — hence C(p+q, p) paths. Many grid problems are
 multiset permutations in disguise, and adding a restriction (e.g. "never cross
 the diagonal") leads straight to [Catalan numbers](catalan.md).
 
+![Every right/up path is a word in R and U: this one is R U U R R U R](../.gitbook/assets/lattice-path.png)
+
 **Pitfall**: this formula is for arranging a *fixed* multiset. "How many
 multisets can be formed…" or "distribute identical objects into boxes" are
 *different* problems — see [combinations of multisets](multiset-combinations.md).
@@ -64,6 +66,14 @@ auto C = [](int n, int m) {
 };
 r = C(11, 4) * C(7, 4) * C(3, 2);   // 330 * 35 * 3 = 34650
 ```
+
+**Example 7 (walkthrough — BALL under the microscope).** Temporarily label the
+two L's: B, A, L₁, L₂ are 4 distinct objects with 4! = 24 arrangements. Every
+unlabeled arrangement — say L B L A — is produced by exactly 2 labeled ones
+(L₁ B L₂ A and L₂ B L₁ A), because swapping the L's changes nothing visible. So
+the 24 labeled arrangements pair up into 24/2 = 12 identical-looking classes:
+the answer is 4!/2! = 12. Whenever you "divide by the symmetry", this pairing is
+what you are really doing.
 
 ## Practice
 

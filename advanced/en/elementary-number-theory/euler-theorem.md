@@ -21,6 +21,8 @@ primes matter — the exponents aᵢ are invisible here except through n itself.
 Special cases: φ(p) = p − 1 for prime p; φ(pᵏ) = pᵏ − pᵏ⁻¹; and φ is
 **multiplicative**: φ(ab) = φ(a)φ(b) when gcd(a, b) = 1.
 
+![φ(n) for n = 1…12 — the highlighted bar counts 1, 5, 7, 11, the four numbers coprime to 12](../.gitbook/assets/phi-chart.png)
+
 **Euler's theorem**: if gcd(a, n) = 1, then
 
 > a^φ(n) ≡ 1 (mod n)
@@ -80,6 +82,13 @@ for (int i = 2; i <= n; i++) {
     }
 }
 ```
+
+**Example 7 (walkthrough — last digit of 3²⁰²⁴, slowly).** gcd(3, 10) = 1 and
+φ(10) = 4 (the numbers 1, 3, 7, 9 — count them on the chart above). So
+3⁴ ≡ 1 (mod 10). Write 2024 = 4·506, hence 3²⁰²⁴ = (3⁴)⁵⁰⁶ ≡ 1⁵⁰⁶ = 1 (mod 10):
+the last digit is 1. Without Euler you would compute 3, 9, 7, 1, 3, 9, 7, 1… and
+discover the same period 4 — the theorem *promises* a cycle exists and bounds its
+length by φ(n).
 
 ## Practice
 

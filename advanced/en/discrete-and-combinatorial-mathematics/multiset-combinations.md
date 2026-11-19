@@ -56,6 +56,13 @@ C(6, 2) = 15 each, three variables → 45). Add back double violations
 long long ans = C(m + k - 1, k - 1);
 ```
 
+**Example 6 (walkthrough — stars and bars, one configuration at a time).** Solve
+x + y + z = 4 in non-negative integers. Writing 4 stars and placing 2 bars gives
+pictures like ★|★★|★ (x = 1, y = 2, z = 1) or ||★★★★ (x = 0, y = 0, z = 4).
+Every picture is a choice of where the 2 bars sit among 4 + 2 = 6 slots:
+C(6, 2) = 15 solutions. And indeed the formula says C(4+3−1, 3−1) = C(6, 2) = 15.
+The picture *is* the proof — stars are items, bars are walls between boxes.
+
 ## Practice
 
 1. How many non-negative integer solutions does x + y + z + w = 12 have?

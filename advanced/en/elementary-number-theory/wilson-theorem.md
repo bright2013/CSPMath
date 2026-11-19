@@ -53,6 +53,13 @@ for (int i = 2; i < n; i++) f = f * i % n;
 bool prime = (f == n - 1);   // Wilson — for demonstration only, O(n)
 ```
 
+**Example 6 (walkthrough — 10! mod 11 by pure pairing).** Pair the factors 2…9
+into inverse couples: 2·6 = 12 ≡ 1, 3·4 = 12 ≡ 1, 5·9 = 45 ≡ 1, 7·8 = 56 ≡ 1
+(mod 11). Only 1 and 10 are left unpaired, and 10 ≡ −1, so
+10! ≡ 1·1·1·1·1·10 ≡ −1 (mod 11). Notice we never computed 10! = 3628800 — the
+pairing *is* the computation. This is the whole content of Wilson's theorem in
+one line of arithmetic.
+
 ## Practice
 
 1. Verify Wilson's theorem for p = 11 by computing 10! mod 11.

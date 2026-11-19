@@ -15,6 +15,8 @@ own position** (π(i) ≠ i for all i). The count satisfies:
 
 First values: 0, 1, 2, 9, 44, 265 (n = 1…6).
 
+![One of the 9 derangements of 4 letters: letter i never lands in envelope i](../.gitbook/assets/derangement-letters.png)
+
 **Recurrence idea**: element 1 goes to position k (n−1 choices). If element k goes
 back to position 1, the remaining n−2 elements derange freely: Dₙ₋₂ options.
 Otherwise element k must avoid position 1 — exactly as if it *were* element 1 among
@@ -61,6 +63,18 @@ for (int i = 3; i <= n; i++)
 
 **Example 6.** Verify D₅ = 44 by the formula: 5!(1/2! − 1/3! + 1/4! − 1/5!) =
 120·(1/2 − 1/6 + 1/24 − 1/120) = 60 − 20 + 5 − 1 = 44. ✓
+
+**Example 7 (walkthrough — D₄ from the recurrence, twice over).** We know
+D₁ = 0, D₂ = 1. Climb: D₃ = 2·(1 + 0) = 2; D₄ = 3·(2 + 1) = 9; D₅ = 4·(9 + 2) =
+44. Every step needs only the previous two values — that is why the DP code is
+three lines long. And the closed form agrees:
+4!·(1 − 1 + 1/2 − 1/6 + 1/24) = 24·(9/24) = 9. Two roads, same 9.
+
+**Example 8 (walkthrough — 4 people at a round table, concretely).** Seat Alice
+first — because the table rotates, her chair does not matter. Then Ben has 3
+free seats, Carol 2, Dave 1: 3·2·1 = 6 = (4−1)! arrangements. Listing them by
+who sits on Alice's right: ABCD, ABDC, ACBD, ACDB, ADBC, ADCB — six genuinely
+different circles.
 
 ## Practice
 

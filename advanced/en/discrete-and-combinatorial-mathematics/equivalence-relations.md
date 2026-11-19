@@ -63,6 +63,19 @@ void unite(int x, int y) { fa[find(x)] = find(y); }
 // same class?  find(x) == find(y)
 ```
 
+**Example 6 (walkthrough — checking the three properties, property by
+property).** Is "x ~ y iff x − y is divisible by 4" an equivalence on ℤ?
+Reflexive: x − x = 0, divisible by 4 ✓. Symmetric: if 4 | (x−y) then
+4 | (y−x) = −(x−y) ✓. Transitive: if x−y = 4a and y−z = 4b then
+x−z = 4(a+b) ✓. Three small checks, and suddenly the whole infinite set ℤ
+collapses into just 4 objects worth thinking about: [0], [1], [2], [3].
+
+**Example 7 (walkthrough — a DSU trace).** Start: each of {1,2,3,4} alone.
+unite(1,2) → {1,2},{3},{4}; unite(3,4) → {1,2},{3,4}; find(1) = find(2) → same
+class, yes; find(1) = find(3)? different → no. unite(2,3) → {1,2,3,4}; now every
+find returns the same representative. Four elements, three unions, and the
+partition evolved exactly as the equivalence classes should.
+
 ## Practice
 
 1. Which are equivalence relations on ℤ? (a) a ~ b iff a | b; (b) a ~ b iff

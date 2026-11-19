@@ -45,6 +45,12 @@ whose sum is divisible by n: consider prefix sums s₀, s₁, …, sₙ mod n �
 n residues; either some sᵢ ≡ 0 (take the prefix itself), or two prefix sums collide
 and their difference sⱼ − sᵢ is the desired segment.
 
+**Example 7 (walkthrough — the prefix-sum trick with real numbers).** Take the
+sequence 3, 1, 4, 1, 5 (n = 5). Prefix sums mod 5: s₀ = 0, s₁ = 3, s₂ = 4,
+s₃ = 8 ≡ 3, s₄ = 9 ≡ 4, s₅ = 14 ≡ 4. Six pigeons, five holes — and indeed
+s₂ = s₄ = 4 collide. Their difference a₃ + a₄ = 4 + 1 = 5 is divisible by 5.
+No searching required: the collision *hands* you the answer.
+
 ## Practice
 
 1. How many socks must you draw blindfolded from a drawer with 4 colors to guarantee

@@ -71,6 +71,13 @@ F₁₀ in O(log 10) matrix multiplications — versus O(n) iteration.
 **Example 5.** (AB)ᵀ check: with A = [[1,2],[3,4]], B as above:
 (AB)ᵀ = [[19,43],[22,50]] = BᵀAᵀ = [[5,7],[6,8]]·[[1,3],[2,4]] ✓.
 
+**Example 6 (walkthrough — one entry of one product, the honest way).** Compute
+c₁₂ of [[1,2],[3,4]]·[[5,6],[7,8]] with your finger: put it on row 1 of A —
+[1, 2] — and slide it down column 2 of B — [6, 8]. Multiply as you go: 1·6 = 6,
+2·8 = 16; add: 22. That is all a matrix product ever is, repeated m×n times. The
+row and column *must* have the same length — that is why the inner dimensions
+have to match.
+
 ## Practice
 
 1. Compute [[2,0],[1,3]] · [[1,1],[0,2]] and the product in the reverse order.

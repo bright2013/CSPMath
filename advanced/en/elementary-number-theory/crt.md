@@ -62,6 +62,15 @@ x = (x + m1 * m2) % (m1 * m2);
 **Example 4.** Garner's algorithm restores x from residues one modulus at a time
 without big-int arithmetic — the standard tool when M overflows 64 bits.
 
+**Example 5 (walkthrough — merging non-coprime congruences).** Solve
+x ≡ 1 (mod 4), x ≡ 3 (mod 6). Consistency check first: gcd(4, 6) = 2, and
+1 ≡ 3 (mod 2) ✓ — solutions exist. From the first congruence write x = 1 + 4t
+and substitute into the second: 1 + 4t ≡ 3 (mod 6) → 4t ≡ 2 (mod 6). Divide
+everything by gcd(4, 6) = 2: 2t ≡ 1 (mod 3), so t ≡ 2 (mod 3). Then
+x = 1 + 4·2 = 9, and all solutions are x ≡ 9 (mod lcm(4, 6)), i.e. mod 12. The
+merge recipe never changes: substitute → divide by the gcd → solve → glue the
+moduli with lcm.
+
 ## Practice
 
 1. Solve x ≡ 1 (mod 3), x ≡ 2 (mod 5). *(Answer: x ≡ 7 (mod 15).)*

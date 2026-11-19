@@ -37,6 +37,8 @@ non-zero entry (**pivot (主元)**) sits strictly right of the row above is in
 **row echelon form (行阶梯形)**; with pivots = 1 and zeros above each pivot,
 **reduced row echelon form (行最简形)**.
 
+![Row echelon form: pivots form a staircase, everything below a pivot is zero](../.gitbook/assets/echelon.png)
+
 ## Examples
 
 **Example 1.** Swap R₁ ↔ R₂ on [[1, 2], [3, 4]] → [[3, 4], [1, 2]].
@@ -61,6 +63,15 @@ operation.
 matrix (A | I) to (I | B); the same operations that turn A into I turn I into
 B = A⁻¹. This is the standard hand-computation method and the proof that
 "invertible ⇔ reduces to I".
+
+**Example 6 (walkthrough — one elimination, told slowly).** Solve
+x + 2y = 5 and 3x + y = 5. Augmented matrix [[1, 2 | 5], [3, 1 | 5]]. The pivot
+of row 1 is the 1 in column 1; row 2 has a 3 below it, three times the pivot, so
+R₂ ← R₂ − 3R₁ wipes it out: [3−3·1, 1−3·2 | 5−3·5] = [0, −5 | −10]. Now the
+matrix is upper triangular — that is the *entire* forward phase. Back-substitute:
+y = (−10)/(−5) = 2, then x = 5 − 2·2 = 1. Check: 1 + 4 = 5 ✓, 3 + 2 = 5 ✓.
+Every elimination, however large, is this loop repeated: pick pivot → kill the
+column below → move right.
 
 ## Practice
 

@@ -18,6 +18,8 @@
   triples (row, col, value) — the **coordinate list (COO)** — or, in graph
   language, adjacency lists.
 
+![A 5×5 matrix with 5 nonzeros, and the triple list that stores it compactly](../.gitbook/assets/sparse-matrix.png)
+
 **Why triangular matrices are the goal, not the starting point**:
 [Gaussian elimination](gaussian-elimination.md) *ends* with an upper triangular
 matrix, and that is precisely the point — a triangular system is trivially
@@ -59,6 +61,14 @@ triangular system costs only O(n²).
 **Example 6.** Matrix fast power starts from the identity: `R = I` is the
 neutral element in `R = R * A^k` loops — forgetting this initialization is a
 classic bug.
+
+**Example 7 (walkthrough — multiplying triangular matrices stays triangular).**
+Take U = [[1, 2], [0, 3]] and V = [[2, 1], [0, 1]], both upper triangular. Then
+U·V = [[1·2+2·0, 1·1+2·1], [0·2+3·0, 0·1+3·1]] = [[2, 3], [0, 3]] — upper
+triangular again, and the diagonal (2, 3) is the entrywise product of the
+diagonals. Zeros below the diagonal can never "leak upwards" through
+multiplication — that is why elimination's triangular result is stable and why
+determinants of triangular matrices are free.
 
 ## Practice
 

@@ -71,6 +71,20 @@ long long coef = fact[n] * invFact[k] % P * invFact[n - k] % P;
 intuition: e.g. n = 5 = 101₂ → 4 odd entries: 1, 5, 5… check row 5:
 1 5 10 10 5 1 → 4 odd ✓).
 
+![Coloring the odd entries of Pascal's triangle reveals a Sierpinski gasket — binomial coefficients mod 2 are fractal](../.gitbook/assets/pascal-odd.png)
+
+The picture shows *why* such a clean formula can exist: C(n, k) mod 2 follows a
+self-similar pattern, and the 1-bits of n count its "active" sub-triangles.
+
+**Example 8 (walkthrough — extracting a coefficient by pure counting).** What is
+the coefficient of x² in (x + 2)⁴? Expanding means: from each of the 4 factors
+(x+2) pick either x or 2, then multiply your picks. To end up with x² you must
+pick x from exactly 2 factors and 2 from the other 2. There are C(4, 2) = 6 ways
+to choose which factors give x, and each contributes x²·2² = 4x². Total:
+6·4x² = 24x² — coefficient 24, matching Example 1. Every binomial coefficient
+extraction is this two-step: *which factors?* (C(n,k)) × *what constants?* (the
+powers of a and b).
+
 ## Practice
 
 1. Expand (x + 3)³ and (a − b)⁴.
